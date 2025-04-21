@@ -3,11 +3,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from vector import retriever
 
 from telegram import Update
-from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
-
-import asyncio
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
 TELEGRAM_TOKEN=""
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Привет! Я бот ТП 🤖")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     question = update.message.text
@@ -28,13 +29,11 @@ template = """
 prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
-async def main():
+if __name__ == "__main__":
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
+    app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     print("Бот запущен")
-    await app.run_polling()
-    
-if __name__ == "__main__":
-    asyncio.run(main())
+    app.run_polling()
