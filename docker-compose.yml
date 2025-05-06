@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  ai_vector:
+    build: .
+    restart: unless-stopped
+    command: python main.py
