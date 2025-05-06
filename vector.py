@@ -6,7 +6,7 @@ import pandas as pd
 
 df = pd.read_csv("info_base.csv")
 print(df.columns)
-embeddings = OllamaEmbeddings(model="mxbai-embed-large")
+embeddings = OllamaEmbeddings(base_url="http://host.docker.internal:11434", model="mxbai-embed-large")
 
 db_location = "./chrome_langchain_db"
 add_documents = not os.path.exists(db_location)

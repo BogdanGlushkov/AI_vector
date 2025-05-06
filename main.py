@@ -17,7 +17,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(result)
 
 
-model = OllamaLLM(model="deepseek-r1:14b")
+model = OllamaLLM(base_url="http://host.docker.internal:11434", model="deepseek-r1:14b")
 
 template = """
 Ты эксперт в ответах на вопросы о услугах жкх (горячая вода, электроэнергия)
