@@ -5,3 +5,5 @@ services:
     build: .
     restart: unless-stopped
     command: python main.py
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
